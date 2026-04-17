@@ -10,7 +10,7 @@ This project follows a decoupled, full-stack architecture to ensure scalability 
 
 * **Frontend:** React.js, Tailwind CSS, Redux Toolkit, Lucide Icons.
 * **Backend:** Python, FastAPI, SQLAlchemy, Uvicorn.
-* **Database:** **MySQL 8.0+** (Migrated from SQLite for enterprise-grade data integrity).
+* **Database:** MySQL 8.0+
 * **AI / LLM:** LangGraph, LangChain, Groq API (`llama-3.3-70b-versatile`).
 
 ---
