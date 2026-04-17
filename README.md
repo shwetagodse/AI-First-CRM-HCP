@@ -9,7 +9,8 @@
 This project follows a decoupled, full-stack architecture to ensure scalability and real-time state synchronization.
 
 * **Frontend:** React.js, Tailwind CSS, Redux Toolkit, Lucide Icons.
-* **Backend:** Python, FastAPI, SQLAlchemy (SQLite), Uvicorn.
+* **Backend:** Python, FastAPI, SQLAlchemy, Uvicorn.
+* **Database:** **MySQL 8.0+** (Migrated from SQLite for enterprise-grade data integrity).
 * **AI / LLM:** LangGraph, LangChain, Groq API (`llama-3.3-70b-versatile`).
 
 ---
@@ -17,35 +18,41 @@ This project follows a decoupled, full-stack architecture to ensure scalability 
 ## ✨ Key Features
 
 1.  **Dual-Pane Synchronization:** Users can interact with a standard web form on the left or chat with the AI on the right. Both panes stay perfectly in sync via Redux state management.
-2.  **Conversational Data Entry:** The AI agent extracts entities (HCP Name, Interaction Type, Topics, Sentiment) from natural language and automatically populates the structured database and UI.
-3.  **Crash-Proof Editing:** Users can conversationally correct specific fields (e.g., *"Actually, the sentiment was negative"*). The agent intelligently updates **only** the targeted field without wiping existing data or crashing due to missing IDs.
+2.  **Conversational Data Entry:** The AI agent extracts entities (HCP Name, Interaction Type, Topics, Sentiment) from natural language and automatically populates the structured MySQL database and UI.
+3.  **Crash-Proof Editing:** Users can conversationally correct specific fields (e.g., *"Actually, the sentiment was negative"*). The agent intelligently updates **only** the targeted field without wiping existing data.
 4.  **Advanced Entity Resolution:** Strict system prompts prevent the AI from incorrectly overwriting names when pronouns (e.g., *"the doctor"*, *"he"*) are used in follow-up prompts.
 
 ---
 
 ## 🛠️ The LangGraph Agent & Tools
 
-The core of the AI backend is a LangGraph state machine equipped with 5 specialized tools. The agent autonomously decides which tool to trigger based on user intent.
+The core of the AI backend is a LangGraph state machine equipped with 5 specialized tools:
 
-1.  `log_interaction` *(Mandatory)*: Extracts core meeting details and logs them to the SQLite database.
-2.  `edit_interaction` *(Mandatory)*: Modifies a specific field of an existing draft or logged interaction securely.
-3.  `retrieve_materials` *(Sales Activity)*: A mock RAG tool that searches the company database for product collateral (e.g., Safety Guidelines) based on conversational queries.
-4.  `suggest_followups` *(Sales Activity)*: Analyzes topics discussed and proposes actionable next steps based on predefined business rules.
-5.  `analyze_sentiment` *(Sales Activity)*: Explicitly calculates and classifies the conversational tone using positive/negative keyword matching.
+1.  `log_interaction`: Extracts core meeting details and logs them to the **MySQL** database.
+2.  `edit_interaction`: Modifies specific fields of an existing interaction securely.
+3.  `retrieve_materials`: A mock RAG tool that searches for product collateral (e.g., Safety Guidelines).
+4.  `suggest_followups`: Analyzes discussed topics to propose actionable next steps.
+5.  `analyze_sentiment`: Classifies conversational tone using NLP.
 
 ---
 
 ## 🚀 Setup & Installation Instructions
 
-Follow these steps to run the application locally.
-
 ### Prerequisites
 * Node.js (v16+)
 * Python (3.9+)
+* MySQL Server (Running on port 3306)
 * A Groq API Key
 
-### 1. Backend Setup (FastAPI + LangGraph)
-Open a terminal and navigate to the backend directory:
+### 1. Database Setup
+1.  Log into your MySQL instance.
+2.  Create a new database for the project:
+    ```sql
+    CREATE DATABASE crm_db;
+    ```
+
+### 2. Backend Setup (FastAPI + LangGraph)
+Navigate to the backend directory:
 ```bash
 cd hcp-crm-backend
 
@@ -57,7 +64,11 @@ Set up your environment variables:
 
     Copy the .env.example file and rename it to .env.
 
-    Open .env and paste your Groq API key: GROQ_API_KEY=your_key_here.
+    Fill in your credentials:
+
+    Open .env and paste your
+    GROQ_API_KEY=your_groq_key_here
+    MYSQL_PASSWORD=your_mysql_password_here
 
 Start the backend server:
 
