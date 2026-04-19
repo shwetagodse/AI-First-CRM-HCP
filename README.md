@@ -1,4 +1,4 @@
-# AI-First CRM HCP Module 🩺🤖
+# AI-First CRM HCP 🩺🤖
 
 **Task 1 Technical Assessment** A modern, AI-driven Customer Relationship Management (CRM) module designed for Life Sciences field representatives. This application features a dual-pane interface that seamlessly synchronizes natural language conversational inputs with structured CRM data logging using a LangGraph-powered AI agent.
 
