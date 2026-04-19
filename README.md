@@ -1,6 +1,6 @@
 # AI-First CRM HCP 🩺🤖
 
-**Task 1 Technical Assessment** A modern, AI-driven Customer Relationship Management (CRM) module designed for Life Sciences field representatives. This application features a dual-pane interface that seamlessly synchronizes natural language conversational inputs with structured CRM data logging using a LangGraph-powered AI agent.
+A modern, AI-driven Customer Relationship Management (CRM) module designed for Life Sciences Healthcare professional (HCP) field representatives. This application features a dual-pane interface that seamlessly synchronizes natural language conversational inputs with structured CRM data logging using a LangGraph-powered AI agent.
 
 ---
 
@@ -9,7 +9,7 @@
 This project follows a decoupled, full-stack architecture to ensure scalability and real-time state synchronization.
 
 * **Frontend:** React.js, Tailwind CSS, Redux Toolkit, Lucide Icons.
-* **Backend:** Python, FastAPI, SQLAlchemy, Uvicorn.
+* **Backend:** Python, FastAPI, Uvicorn.
 * **Database:** MySQL 8.0+
 * **AI / LLM:** LangGraph, LangChain, Groq API (`llama-3.3-70b-versatile`).
 
